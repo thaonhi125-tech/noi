@@ -3,162 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>N ơi - Cộng đồng NhiLe</title>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R0LZL5XTQ0"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-R0LZL5XTQ0');
-    </script>
+    <title>N-ơi | Khởi đầu mới</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg-color: #FBF9F5; --primary-color: #8B5E3C; --primary-light: #C4A484; --text-color: #2D2D2D; --white: #FFFFFF; --yellow-accent: #FBBF24; --yellow-light: #FEF3C7; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; -webkit-tap-highlight-color: transparent; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #C4A484; border-radius: 10px; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .fade-in { animation: fadeIn 0.6s ease-out forwards; }
-        .card { background: white; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08); }
-        .nav-item.active { background-color: var(--yellow-light); color: var(--primary-color); font-weight: bold; }
-        .google-btn { transition: all 0.3s ease; border: 1px solid #e5e7eb; }
-        .google-btn:hover { background-color: #f9fafb; transform: translateY(-1px); }
+        :root {
+            --bg-color: #F8F7F4;
+            --primary-color: #8B5E3C;
+            --primary-light: #C4A484;
+            --text-color: #333333;
+            --white: #FFFFFF;
+            --yellow-accent: #FBBF24;
+            --yellow-light: #FEF3C7;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            font-family: 'Be Vietnam Pro', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-sans { font-family: 'Be Vietnam Pro', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        .nav-item.active { background-color: var(--yellow-light); color: var(--primary-color); font-weight: 700; }
         #sidebar { transition: transform 0.3s ease-in-out; }
-        .chart-container { position: relative; width: 100%; max-width: 600px; height: 300px; margin: 0 auto; }
-        .story-ring { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); padding: 2px; border-radius: 50%; }
-        .story-avatar { border: 2px solid white; border-radius: 50%; }
     </style>
 </head>
-<body class="flex h-screen overflow-hidden text-gray-800 bg-[#FBF9F5]">
+<body class="flex h-dvh overflow-hidden">
 
-    <!-- Sidebar -->
-    <aside id="sidebar" class="absolute md:relative z-50 md:z-auto bg-white w-64 h-full flex-shrink-0 shadow-lg md:shadow-none transform -translate-x-full md:translate-x-0 flex flex-col">
-        <div class="p-4 border-b border-gray-100 flex items-center space-x-3">
-            <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center font-bold text-amber-800">N</div>
+    <!-- === SIDEBAR === -->
+    <aside id="sidebar" class="absolute md:relative z-50 md:z-auto bg-white w-64 h-full flex-shrink-0 shadow-xl md:shadow-none transform -translate-x-full md:translate-x-0 flex flex-col">
+        <div class="p-5 border-b border-gray-100 flex items-center space-x-3">
+            <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center font-bold text-amber-800 text-lg">N</div>
             <div><p class="text-sm font-bold" id="sidebar-username">Nhi Le</p><p class="text-xs text-gray-500">Hạt giống tiềm năng</p></div>
         </div>
-        <nav class="flex-1 p-2 space-y-2">
-            <button class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl" data-tab="home" onclick="app.navigate('home')"><span class="text-lg">📖</span><span class="text-sm font-medium">Học Tập</span></button>
-            <button class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl" data-tab="community" onclick="app.navigate('community')"><span class="text-lg">🤝</span><span class="text-sm font-medium">Kết Nối</span></button>
-            <button class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl" data-tab="live" onclick="app.navigate('live')"><span class="text-lg">◎</span><span class="text-sm font-medium">Live Hub</span></button>
-            <button class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl" data-tab="profile" onclick="app.navigate('profile')"><span class="text-lg">🎓</span><span class="text-sm font-medium">Tôi</span></button>
+        <nav class="flex-1 p-3 space-y-2">
+            <a href="#" class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl transition-colors duration-200 hover:bg-gray-100" data-tab="home" onclick="app.navigate('home')"><span class="text-xl">📖</span><span class="text-sm">Học Tập</span></a>
+            <a href="#" class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl transition-colors duration-200 hover:bg-gray-100" data-tab="community" onclick="app.navigate('community')"><span class="text-xl">🤝</span><span class="text-sm">Kết Nối</span></a>
+            <a href="#" class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl transition-colors duration-200 hover:bg-gray-100" data-tab="live" onclick="app.navigate('live')"><span class="text-xl">📡</span><span class="text-sm">Live Hub</span></a>
+            <a href="#" class="nav-item w-full flex items-center space-x-3 p-3 rounded-xl transition-colors duration-200 hover:bg-gray-100" data-tab="profile" onclick="app.navigate('profile')"><span class="text-xl">👤</span><span class="text-sm">Tôi</span></a>
         </nav>
     </aside>
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="app.toggleSidebar()"></div>
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden md:hidden" onclick="app.toggleSidebar()"></div>
 
-    <!-- Main App -->
-    <div id="main-app" class="hidden flex flex-col h-full w-full">
-        <header id="main-header" class="flex-none px-4 pt-6 pb-4 bg-transparent z-30"></header>
-        <main id="app-content" class="flex-1 overflow-y-auto relative scroll-smooth no-scrollbar"></main>
+    <!-- === MAIN CONTENT === -->
+    <div id="app-container" class="w-full h-full bg-gray-50 flex items-center justify-center">
+        <!-- This will be replaced by either Auth or Main App -->
     </div>
     
-    <!-- Auth Screen -->
-    <div id="auth-container" class="fixed inset-0 z-[100] bg-[#FBF9F5] flex flex-col items-center justify-center px-8 text-center">
-         <div class="fade-in flex flex-col items-center">
-            <div class="w-20 h-20 bg-white rounded-3xl shadow-sm flex items-center justify-center text-3xl mb-6 border border-gray-100">N</div>
-            <h1 class="text-3xl font-bold mb-2 tracking-tight">Mừng bạn về nhà</h1>
-            <p class="text-gray-500 mb-12 max-w-xs leading-relaxed">Nơi thấu hiểu chính mình và kiến tạo vận mệnh cùng cộng đồng NhiLe.</p>
-            <button onclick="app.signIn()" class="google-btn bg-white w-full max-w-sm py-4 rounded-2xl flex items-center justify-center space-x-4 shadow-sm mb-4">
-                <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.67l-3.57-2.77c-1 .67-2.28 1.07-3.71 1.07-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-                <span class="font-medium text-gray-700">Tiếp tục với Google</span>
-            </button>
-        </div>
-    </div>
-
     <script>
-        const store = {
+    const AppTemplate = {
+        auth: () => `
+            <div id="auth-screen" class="w-full h-full bg-white flex flex-col items-center justify-center p-8 text-center fade-in">
+                <div class="w-24 h-24 bg-amber-100 rounded-3xl flex items-center justify-center text-4xl mb-6 border-4 border-white shadow-lg">N</div>
+                <h1 class="text-4xl font-bold mb-2 tracking-tight">Mừng bạn về nhà</h1>
+                <p class="text-gray-500 mb-12 max-w-xs leading-relaxed">Nơi thấu hiểu chính mình và kiến tạo vận mệnh cùng cộng đồng NhiLe.</p>
+                <button onclick="app.signIn()" class="w-full max-w-sm py-4 rounded-2xl flex items-center justify-center space-x-3 shadow-lg bg-gray-800 text-white font-semibold hover:bg-gray-900 transition-all duration-300 transform hover:scale-105">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.67l-3.57-2.77c-1 .67-2.28 1.07-3.71 1.07-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                    <span>Tiếp tục với Google</span>
+                </button>
+            </div>
+        `,
+        main: () => `
+            <div id="main-app" class="flex flex-col h-full w-full fade-in">
+                <header id="main-header" class="flex-none px-6 pt-6 pb-4 bg-transparent z-10"></header>
+                <main id="app-content" class="flex-1 overflow-y-auto no-scrollbar"></main>
+            </div>
+        `
+    };
+
+    const ViewTemplate = {
+        _renderHeader(title) {
+            return `
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <button onclick="app.toggleSidebar()" class="md:hidden text-3xl p-2 -ml-2 text-gray-600">&#9776;</button>
+                        <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-gray-800">${title}</h1>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-white rounded-full px-3 py-1.5 shadow-sm border cursor-pointer">
+                        <span class="text-yellow-500 text-xl">🏆</span>
+                        <span class="font-bold text-sm text-gray-700">${app.store.user.trustScore}</span>
+                    </div>
+                </div>
+            `;
+        },
+        home(container) {
+            const header = this._renderHeader('Học Tập');
+            const currentNode = app.store.roadmap.find(node => node.status === 'current');
+
+            const categoriesHtml = app.store.categories.map(cat => `
+                <div class="bg-white rounded-2xl p-4 flex items-center space-x-4 cursor-pointer transition-transform duration-200 transform hover:-translate-y-1" style="box-shadow: var(--card-shadow);">
+                    <span class="text-4xl">${cat.icon}</span>
+                    <div>
+                        <p class="font-bold text-base">${cat.name}</p>
+                        <p class="text-xs text-gray-500">${cat.courses} khóa học</p>
+                    </div>
+                </div>`).join('');
+            
+            const roadmapHtml = app.store.roadmap.map(node => `
+                <div class="bg-white rounded-2xl p-5 transition-transform duration-200 transform hover:-translate-y-1 ${node.status === 'locked' ? 'opacity-60' : 'cursor-pointer'}" style="box-shadow: var(--card-shadow);">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 tracking-wider">${node.category.toUpperCase()} &middot; ${node.type.toUpperCase()}</p>
+                            <h3 class="font-bold text-lg mt-1 text-gray-800">${node.title}</h3>
+                            <p class="text-sm text-gray-500 mt-2">${node.desc}</p>
+                        </div>
+                        <div class="text-4xl ml-4 pt-1">${node.status === 'locked' ? '🔒' : (node.status === 'completed' ? '✅' : '▶️')}</div>
+                    </div>
+                </div>`).join('');
+
+            const html = `
+                ${header}
+                <div class="px-6 py-4 space-y-8">
+                    <section>
+                        <div class="relative">
+                            <input type="text" placeholder="Tìm kiếm khóa học, thử thách..." class="w-full bg-white rounded-xl py-4 pl-12 pr-4 shadow-sm border-transparent focus:outline-none focus:ring-2 focus:ring-amber-400 transition"/>
+                            <span class="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400 text-xl">🔍</span>
+                        </div>
+                    </section>
+                    ${currentNode ? `
+                    <section>
+                        <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-gray-700">Tiếp tục hành trình</h2></div>
+                        <div class="p-6 rounded-2xl flex items-center border-2 border-amber-300 cursor-pointer bg-amber-50" style="box-shadow: var(--card-shadow);">
+                            <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mr-5 shadow-inner"><span class="text-4xl">${currentNode.icon}</span></div>
+                            <div class="flex-grow">
+                                <p class="text-xs text-amber-600 font-bold uppercase">ĐANG HỌC - 60%</p>
+                                <h3 class="font-bold text-xl text-gray-800 mt-1">${currentNode.title}</h3>
+                                <p class="text-sm text-gray-500 mt-1">${currentNode.desc}</p>
+                            </div>
+                        </div>
+                    </section>` : ''}
+                    <section>
+                        <h2 class="text-xl font-bold mb-4 text-gray-700">Khám phá theo chủ đề</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">${categoriesHtml}</div>
+                    </section>
+                    <section class="pb-20">
+                        <h2 class="text-xl font-bold mb-4 text-gray-700">Lộ trình đề xuất</h2>
+                        <div class="space-y-4">${roadmapHtml}</div>
+                    </section>
+                </div>
+            `;
+            container.innerHTML = html;
+        },
+        community(container) {
+            const header = this._renderHeader('Kết Nối');
+            container.innerHTML = `${header}<div class="p-6 text-center text-gray-500"><h3 class="font-bold text-lg mt-10">Tính năng đang phát triển</h3></div>`;
+        },
+        live(container) {
+            const header = this._renderHeader('Live Hub');
+            container.innerHTML = `${header}<div class="p-6 text-center text-gray-500"><h3 class="font-bold text-lg mt-10">Tính năng đang phát triển</h3></div>`;
+        },
+        profile(container) {
+            const header = this._renderHeader('Trang cá nhân');
+            const user = app.store.user;
+            const html = `
+                ${header}
+                <div class="px-6 py-4 text-center">
+                    <img src="${user.avatarUrl}" class="w-32 h-32 rounded-full mx-auto mb-4 shadow-xl border-4 border-white"/>
+                    <h2 class="text-2xl font-bold">${user.name}</h2>
+                    <p class="text-gray-500">Hạt giống tiềm năng</p>
+                    <div class="mt-8 bg-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-bold text-lg mb-4 text-left text-gray-700">Biểu đồ kỹ năng</h3>
+                        <div style="height:300px; width:100%"><canvas id="skillsChart"></canvas></div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+            setTimeout(() => {
+                const ctx = document.getElementById('skillsChart')?.getContext('2d');
+                if (!ctx) return;
+                if(window.mySkillsChart) window.mySkillsChart.destroy();
+                window.mySkillsChart = new Chart(ctx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Tâm lý', 'Lãnh đạo', 'Kinh doanh', 'Đầu tư', 'Sáng tạo'],
+                        datasets: [{
+                            label: 'Kỹ năng',
+                            data: [75, 80, 60, 50, 85],
+                            backgroundColor: 'rgba(139, 94, 60, 0.2)',
+                            borderColor: 'rgba(139, 94, 60, 1)',
+                            borderWidth: 2,
+                            pointBackgroundColor: 'rgba(139, 94, 60, 1)'
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        scales: { r: { angleLines: { display: false }, suggestedMin: 0, suggestedMax: 100, pointLabels: { font: { size: 14 } }, ticks: { display: false } } },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }, 100);
+        }
+    };
+
+    const app = {
+        store: {
             isLoggedIn: false,
             currentView: 'auth',
-            currentCourseId: null,
-            currentCategory: null,
-            user: { name: "Nhi Le", trustScore: 450 },
-            stories: [{ id: 1, name: "Nhi Le", avatar: "NL", active: true }, { id: 2, name: "Minh Anh", avatar: "MA", active: true }],
-            posts: [{ id: 1, author: "Minh Anh", avatar: "MA", content: "Vừa hoàn thành 7 ngày detox cảm xúc. 🌱", visual: "bg-amber-50" }],
+            user: { name: "Nhi Le", trustScore: 450, avatarUrl: `https://api.dicebear.com/7.x/avataaars/svg?seed=NhiLe` },
             roadmap: [
                 { id: 1, title: "Thấu hiểu bản thân", category: "Tâm lý", type: "Khóa học", icon: "🧘‍♀️", status: "completed", desc: "Khám phá gốc rễ của suy nghĩ và cảm xúc." },
-                { id: 2, title: "Quản trị cảm xúc", category: "Tâm lý", type: "Thử thách", icon: "❤️", status: "current", desc: "Làm chủ phản ứng trước mọi tình huống.", lessons: [{ title: "Bài 1: Nhận diện cảm xúc"}, { title: "Bài 2: Nguồn gốc"}]},
+                { id: 2, title: "Quản trị cảm xúc", category: "Tâm lý", type: "Thử thách", icon: "❤️", status: "current", desc: "Làm chủ phản ứng trước mọi tình huống." },
                 { id: 3, title: "Tư duy Lãnh đạo", category: "Lãnh đạo", type: "Khóa học", icon: "🦁", status: "locked", desc: "Xây dựng tầm nhìn và dẫn dắt đội nhóm." },
-                { id: 4, title: "AI cho Startup", category: "AI Business", icon: "💡", status: "locked", desc: "Ứng dụng AI để tăng trưởng." },
+                { id: 4, title: "AI cho Startup", category: "AI Business", type: "Khóa học", icon: "💡", status: "locked", desc: "Ứng dụng AI để tăng trưởng kinh doanh." },
             ],
-            categories: [{ name: "Tâm lý", icon: "🧠" }, { name: "Lãnh đạo", icon: "🤝" }, { name: "AI Business", icon: "💡" }, { name: "Đầu tư", icon: "🏆" }],
-        };
+            categories: [
+                { name: "Tâm lý", icon: "🧠", courses: 5 }, 
+                { name: "Lãnh đạo", icon: "🤝", courses: 3 }, 
+                { name: "AI Business", icon: "💡", courses: 2 }, 
+                { name: "Đầu tư", icon: "🏆", courses: 4 }
+            ],
+        },
 
-        const app = {
-            init: () => { app.render(); },
-            signIn: () => { store.isLoggedIn = true; store.currentView = 'home'; app.render(); },
-            navigate: (view, data = {}) => {
-                store.currentView = view;
-                store.currentCourseId = data.courseId || null;
-                store.currentCategory = data.categoryName || null;
-                if (window.innerWidth < 768) app.toggleSidebar();
-                app.render();
-            },
-            openCourse: (courseId) => { app.navigate('course_detail', { courseId }); },
-            toggleSidebar: () => {
-                document.getElementById('sidebar').classList.toggle('-translate-x-full');
-                document.getElementById('sidebar-overlay').classList.toggle('hidden');
-            },
-            render: () => {
-                const mainApp = document.getElementById('main-app');
-                const authContainer = document.getElementById('auth-container');
-                if (!store.isLoggedIn) {
-                    mainApp.classList.add('hidden');
-                    authContainer.classList.remove('hidden');
-                } else {
-                    mainApp.classList.remove('hidden');
-                    authContainer.classList.add('hidden');
-                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-                    const activeTab = ['course_detail', 'category_page'].includes(store.currentView) ? 'home' : store.currentView;
-                    const activeNavItem = document.querySelector(`.nav-item[data-tab="${activeTab}"]`);
-                    if(activeNavItem) activeNavItem.classList.add('active');
-                    const container = document.getElementById('app-content');
-                    app.renderHeader();
-                    const viewMap = { home: app.renderHome, community: app.renderCommunity, live: app.renderLive, profile: app.renderProfile, category_page: () => app.renderCategoryPage(container, store.currentCategory), course_detail: () => { const c = store.roadmap.find(c => c.id === store.currentCourseId); app.renderCourseDetail(container, c); } };
-                    (viewMap[store.currentView] || viewMap.home)(container);
-                }
-            },
-            renderHeader: () => {
-                const header = document.getElementById('main-header');
-                let title;
-                let backButton = `<button onclick="app.toggleSidebar()" class="md:hidden text-2xl p-2 -ml-2">☰</button>`;
-                const titleMap = { home: 'Học Tập', community: 'Kết Nối', live: 'Live Hub', profile: 'Trang cá nhân' };
-                if (['course_detail', 'category_page'].includes(store.currentView)) {
-                    backButton = `<button onclick="app.navigate('home')" class="text-2xl p-2 -ml-2">‹</button>`;
-                    title = store.currentView === 'category_page' ? store.currentCategory : store.roadmap.find(c => c.id === store.currentCourseId).title;
-                } else { title = titleMap[store.currentView]; }
-                header.innerHTML = `<div class="flex justify-between items-center fade-in"><div class="flex items-center space-x-3">${backButton}<h1 class="text-xl md:text-2xl font-bold tracking-tight">${title}</h1></div><div class="flex items-center space-x-2 bg-white rounded-full px-3 py-1.5 shadow-sm border cursor-pointer"><span class="text-yellow-500 text-lg">🏆</span><span class="font-bold text-sm">${store.user.trustScore}</span></div></div>`;
-            },
-            renderHome: (container) => {
-                 const categoriesHtml = store.categories.map(cat => `<div class="bg-white rounded-2xl shadow-sm p-4 flex items-center space-x-3 cursor-pointer border hover:bg-gray-50" onclick='app.navigate("category_page", { categoryName: "${cat.name}" })'><span class="text-2xl">${cat.icon}</span><span class="text-sm font-bold">${cat.name}</span></div>`).join('');
-                container.innerHTML = `<div class="p-4 fade-in"><div class="relative mb-8"><input type="text" placeholder="Bạn muốn học gì hôm nay?" class="w-full bg-white rounded-2xl py-3.5 pl-12 pr-4 shadow-sm border"/></div><section class="mb-8"><h2 class="text-lg font-bold mb-4">Khám phá theo chủ đề</h2><div class="grid grid-cols-2 gap-4">${categoriesHtml}</div></section></div>`;
-            },
-            renderCategoryPage: (container, categoryName) => {
-                const filteredCourses = store.roadmap.filter(course => course.category === categoryName);
-                const coursesHtml = filteredCourses.map(node => `<div class="card p-5 border cursor-pointer" onclick="app.openCourse(${node.id})">...</div>`).join('');
-                container.innerHTML = `<div class="p-4 fade-in"><div class="space-y-4 pb-20">${coursesHtml.length > 0 ? coursesHtml : '<p>Chưa có khóa học.</p>'}</div></div>`;
-            },
-            renderCourseDetail: (container, course) => {
-                container.innerHTML = `<div class="p-4"><h2 class="text-xl font-bold">${course.title}</h2></div>`;
-            },
-            renderCommunity: (container) => {
-                container.innerHTML = `<div class="fade-in pb-20"><div class="flex space-x-4 overflow-x-auto px-4 py-4 no-scrollbar bg-white border-b">${store.stories.map(s => `<div class="text-center"><div class="w-16 h-16 story-ring"><div class="story-avatar">${s.avatar}</div></div><span>${s.name}</span></div>`).join('')}</div><div class="space-y-6 mt-4">${store.posts.map(p => `<div class="bg-white"><p>${p.content}</p></div>`).join('')}</div></div>`;
-            },
-            renderLive: (container) => {
-                container.innerHTML = `<div class="flex flex-col items-center justify-center h-full text-center p-6"><h3 class="text-lg font-bold text-gray-400">Hiện chưa có lớp học</h3></div>`;
-            },
-            renderProfile: (container) => {
-                container.innerHTML = `<div class="fade-in text-center p-6 pb-20"><h2 class="text-xl font-bold">${store.user.name}</h2><div class="mt-8 bg-white p-6 rounded-3xl shadow-sm border"><h3 class="font-bold mb-6 text-sm uppercase">Biểu đồ kỹ năng</h3><div class="chart-container"><canvas id="skillsChart"></canvas></div></div></div>`;
-                setTimeout(app.initChart, 50);
-            },
-            initChart: () => {
-                const ctx = document.getElementById('skillsChart').getContext('2d');
-                new Chart(ctx, { type: 'radar', data: { labels: ['Tâm lý', 'Lãnh đạo', 'Kinh doanh', 'Đầu tư', 'Sáng tạo'], datasets: [{ label: 'Kỹ năng', data: [75, 80, 60, 50, 85], backgroundColor: 'rgba(139, 94, 60, 0.2)', borderColor: 'rgba(139, 94, 60, 1)' }] }, options: { scales: { r: { angleLines: { display: false }, suggestedMin: 0, suggestedMax: 100 } } } });
-            },
-        };
-        document.addEventListener('DOMContentLoaded', app.init);
+        init() {
+            this.render();
+        },
+
+        signIn() {
+            this.store.isLoggedIn = true;
+            this.store.currentView = 'home';
+            this.render();
+        },
+
+        navigate(view) {
+            this.store.currentView = view;
+            this.render();
+            if (window.innerWidth < 768 && !document.getElementById('sidebar').classList.contains('-translate-x-full')) {
+                this.toggleSidebar();
+            }
+        },
+
+        toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('-translate-x-full');
+            document.getElementById('sidebar-overlay').classList.toggle('hidden');
+        },
+
+        render() {
+            const container = document.getElementById('app-container');
+            if (!this.store.isLoggedIn) {
+                container.innerHTML = AppTemplate.auth();
+                return;
+            }
+            
+            // If main app isn't there, inject it first
+            if (!document.getElementById('main-app')) {
+                container.innerHTML = AppTemplate.main();
+            }
+
+            // Highlight active nav item
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            const activeNavItem = document.querySelector(`.nav-item[data-tab="${this.store.currentView}"]`);
+            if(activeNavItem) activeNavItem.classList.add('active');
+
+            // Render the current view
+            const viewRenderer = ViewTemplate[this.store.currentView] || ViewTemplate.home;
+            const viewContainer = document.getElementById('app-content');
+            viewRenderer.call(ViewTemplate, viewContainer);
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => app.init());
     </script>
 </body>
 </html>
