@@ -24,14 +24,15 @@
         .card { background: white; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); transition: transform 0.2s ease, box-shadow 0.2s ease; }
         .card:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08); }
         .nav-item.active { background-color: var(--yellow-light); color: var(--primary-color); font-weight: bold; }
-        .ai-float { /* ... */ }
-        .google-btn { /* ... */ }
+        .ai-float { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); cursor: pointer; z-index: 40; color: white; font-size: 24px; }
+        .google-btn { transition: all 0.3s ease; border: 1px solid #e5e7eb; }
+        .google-btn:hover { background-color: #f9fafb; transform: translateY(-1px); }
         #sidebar { transition: transform 0.3s ease-in-out; }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden text-gray-800 bg-[#FBF9F5]">
 
-    <!-- Sidebar, Auth, etc. -->
+    <!-- Sidebar -->
     <aside id="sidebar" class="absolute md:relative z-50 md:z-auto bg-white w-64 h-full flex-shrink-0 shadow-lg md:shadow-none transform -translate-x-full md:translate-x-0 flex flex-col">
         <div class="p-4 border-b border-gray-100 flex items-center space-x-3">
             <div class="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center font-bold text-amber-800">N</div>
@@ -43,11 +44,25 @@
         </nav>
     </aside>
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-40 hidden md:hidden" onclick="app.toggleSidebar()"></div>
+
+    <!-- Main App -->
     <div id="main-app" class="hidden flex flex-col h-full w-full">
         <header id="main-header" class="flex-none px-4 pt-6 pb-4 bg-transparent z-30"></header>
         <main id="app-content" class="flex-1 overflow-y-auto relative scroll-smooth no-scrollbar"></main>
     </div>
-    <div id="auth-container"></div>
+    
+    <!-- Auth Screen -->
+    <div id="auth-container" class="fixed inset-0 z-[100] bg-[#FBF9F5] flex flex-col items-center justify-center px-8 text-center">
+        <div class="fade-in flex flex-col items-center">
+            <div class="w-20 h-20 bg-white rounded-3xl shadow-sm flex items-center justify-center text-3xl mb-6 border border-gray-100">N</div>
+            <h1 class="text-3xl font-bold mb-2 tracking-tight">Mừng bạn về nhà</h1>
+            <p class="text-gray-500 mb-12 max-w-xs leading-relaxed">Nơi thấu hiểu chính mình và kiến tạo vận mệnh cùng cộng đồng NhiLe.</p>
+            <button onclick="app.signIn()" class="google-btn bg-white w-full max-w-sm py-4 rounded-2xl flex items-center justify-center space-x-4 shadow-sm mb-4">
+                <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.67l-3.57-2.77c-1 .67-2.28 1.07-3.71 1.07-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                <span class="font-medium text-gray-700">Tiếp tục với Google</span>
+            </button>
+        </div>
+    </div>
 
     <script>
         const store = {
@@ -57,10 +72,13 @@
             currentCategory: null,
             user: { name: "Nhi Le", trustScore: 450 },
             roadmap: [
-                { id: 1, title: "Thấu hiểu bản thân", category: "Tâm lý", icon: "🧘‍♀️", status: "completed", desc: "Khám phá gốc rễ..." },
-                { id: 2, title: "Quản trị cảm xúc", category: "Tâm lý", icon: "❤️", status: "current", desc: "Làm chủ phản ứng...", lessons: [/*...*/] },
-                { id: 3, title: "Tư duy Lãnh đạo", category: "Lãnh đạo", icon: "🦁", status: "locked", desc: "Xây dựng tầm nhìn..." },
-                { id: 4, title: "AI cho Startup", category: "AI Business", icon: "💡", status: "locked", desc: "Ứng dụng AI để tăng trưởng." },
+                { id: 1, title: "Thấu hiểu bản thân", category: "Tâm lý", type: "Khóa học", icon: "🧘‍♀️", status: "completed", desc: "Khám phá gốc rễ của suy nghĩ và cảm xúc." },
+                { id: 2, title: "Quản trị cảm xúc", category: "Tâm lý", type: "Thử thách", icon: "❤️", status: "current", desc: "Làm chủ phản ứng trước mọi tình huống.", lessons: [
+                    { title: "Bài 1: Nhận diện cảm xúc", duration: "15 phút", completed: true },
+                    { title: "Bài 2: Nguồn gốc của cảm xúc", duration: "20 phút", completed: true },
+                ]},
+                { id: 3, title: "Tư duy Lãnh đạo", category: "Lãnh đạo", type: "Khóa học", icon: "🦁", status: "locked", desc: "Xây dựng tầm nhìn và dẫn dắt đội nhóm." },
+                 { id: 4, title: "AI cho Startup", category: "AI Business", icon: "💡", status: "locked", desc: "Ứng dụng AI để tăng trưởng." },
             ],
             categories: [{ name: "Tâm lý", icon: "🧠" }, { name: "Lãnh đạo", icon: "🤝" }, { name: "AI Business", icon: "💡" }, { name: "Đầu tư", icon: "🏆" }],
         };
@@ -68,45 +86,84 @@
         const app = {
             init: () => { app.render(); },
 
+            signIn: () => {
+                store.isLoggedIn = true;
+                store.currentView = 'home';
+                app.render();
+            },
+
             navigate: (view, data = {}) => {
                 store.currentView = view;
                 store.currentCourseId = data.courseId || null;
                 store.currentCategory = data.categoryName || null;
+                if (window.innerWidth < 768 && !document.getElementById('sidebar').classList.contains('-translate-x-full')) {
+                    app.toggleSidebar();
+                }
                 app.render();
             },
             
             openCourse: (courseId) => { app.navigate('course_detail', { courseId }); },
 
+            toggleSidebar: () => {
+                document.getElementById('sidebar').classList.toggle('-translate-x-full');
+                document.getElementById('sidebar-overlay').classList.toggle('hidden');
+            },
+
             render: () => {
-                // Simplified render logic
-                app.renderHeader();
-                const container = document.getElementById('app-content');
-                switch(store.currentView) {
-                    case 'home': app.renderHome(container); break;
-                    case 'course_detail':
-                        const course = store.roadmap.find(c => c.id === store.currentCourseId);
-                        app.renderCourseDetail(container, course);
-                        break;
-                    case 'category_page':
-                        app.renderCategoryPage(container, store.currentCategory);
-                        break;
-                    default: app.renderHome(container);
+                const mainApp = document.getElementById('main-app');
+                const authContainer = document.getElementById('auth-container');
+
+                if (!store.isLoggedIn) {
+                    mainApp.classList.add('hidden');
+                    authContainer.classList.remove('hidden');
+                } else {
+                    mainApp.classList.remove('hidden');
+                    authContainer.classList.add('hidden');
+                    
+                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                    const activeTab = store.currentView === 'course_detail' || store.currentView === 'category_page' ? 'home' : store.currentView;
+                    const activeNavItem = document.querySelector(`.nav-item[data-tab="${activeTab}"]`);
+                    if(activeNavItem) activeNavItem.classList.add('active');
+
+                    const container = document.getElementById('app-content');
+                    app.renderHeader();
+                    
+                    switch(store.currentView) {
+                        case 'home': app.renderHome(container); break;
+                        case 'community': app.renderCommunity(container); break; // Assuming you have this function
+                        case 'course_detail':
+                            const course = store.roadmap.find(c => c.id === store.currentCourseId);
+                            app.renderCourseDetail(container, course);
+                            break;
+                        case 'category_page':
+                            app.renderCategoryPage(container, store.currentCategory);
+                            break;
+                        default: app.renderHome(container);
+                    }
                 }
             },
             
             renderHeader: () => {
                 const header = document.getElementById('main-header');
-                let title = 'Học Tập';
+                let title;
                 let backButton = `<button onclick="app.toggleSidebar()" class="md:hidden text-2xl p-2 -ml-2">☰</button>`;
+                const titleMap = { 'home': 'Học Tập', 'community': 'Kết Nối' };
 
-                if (store.currentView === 'course_detail' || store.currentView === 'category_page') {
-                    backButton = `<button onclick="app.navigate('home')" class="text-2xl p-2 -ml-2">‹</button>`;
-                    if (store.currentView === 'category_page') {
+                switch(store.currentView) {
+                    case 'course_detail':
+                        const course = store.roadmap.find(c => c.id === store.currentCourseId);
+                        title = course.title;
+                        backButton = `<button onclick="app.navigate('home')" class="text-2xl p-2 -ml-2">‹</button>`;
+                        break;
+                    case 'category_page':
                         title = store.currentCategory;
-                    }
+                        backButton = `<button onclick="app.navigate('home')" class="text-2xl p-2 -ml-2">‹</button>`;
+                        break;
+                    default:
+                        title = titleMap[store.currentView] || 'Học Tập';
                 }
-                header.innerHTML = `<!-- Header HTML with ${title} and backButton -->`;
-                 header.innerHTML = `
+                
+                header.innerHTML = `
                     <div class="flex justify-between items-center fade-in">
                         <div class="flex items-center space-x-3">
                             ${backButton}
@@ -119,16 +176,30 @@
             },
 
             renderHome: (container) => {
-                const categoriesHtml = store.categories.map(cat => 
+                 const currentNode = store.roadmap.find(node => node.status === 'current');
+                 const categoriesHtml = store.categories.map(cat => 
                     `<div class="bg-white rounded-2xl shadow-sm p-4 flex items-center space-x-3 cursor-pointer border hover:bg-gray-50" onclick='app.navigate("category_page", { categoryName: "${cat.name}" })'>
                         <span class="text-2xl">${cat.icon}</span>
                         <span class="text-sm font-bold">${cat.name}</span>
                     </div>`
                 ).join('');
+
                 container.innerHTML = `
                     <div class="p-4 fade-in">
+                         <div class="relative mb-8">
+                            <span class="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-400">🔍</span>
+                            <input type="text" placeholder="Bạn muốn học gì hôm nay?" class="w-full bg-white rounded-2xl py-3.5 pl-12 pr-4 shadow-sm border focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"/>
+                        </div>
+                        ${currentNode ? `
+                        <section class="mb-8">
+                            <div class="flex justify-between items-center mb-3"><h2 class="text-lg font-bold">Tiếp tục hành trình</h2><a href="#" onclick="app.navigate('home')" class="text-xs font-bold text-amber-600">XEM TẤT CẢ</a></div>
+                            <div class="card p-6 flex items-center border cursor-pointer" onclick="app.openCourse(${currentNode.id})">
+                                <div class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mr-4"><span class="text-3xl">${currentNode.icon}</span></div>
+                                <div class="flex-grow"><p class="text-xs text-amber-600 font-bold uppercase">ĐANG HỌC - 45%</p><h3 class="font-bold text-md">${currentNode.title}</h3><p class="text-xs text-gray-500 mt-1">${currentNode.desc}</p></div>
+                            </div>
+                        </section>` : ''}
                         <section class="mb-8"><h2 class="text-lg font-bold mb-4">Khám phá theo chủ đề</h2><div class="grid grid-cols-2 gap-4">${categoriesHtml}</div></section>
-                        <!-- Other sections -->
+                        <section class="pb-20"><h2 class="text-lg font-bold mb-4">Lộ trình đề xuất</h2><div class="space-y-4">${store.roadmap.map(node => `<div class="card p-5 border ${node.status === 'locked' ? 'opacity-60' : ''}" ${node.status !== 'locked' ? `onclick="app.openCourse(${node.id})"` : '' }><div class="flex justify-between items-start"><div><p class="text-xs font-bold text-gray-400">${node.category}</p><h3 class="font-bold text-md mt-1">${node.title}</h3></div><div class="ml-4"><span class="text-2xl mb-2">${node.status === 'locked' ? '🔒' : '✔️'}</span></div></div></div>`).join('')}</div></section>
                     </div>`;
             },
 
@@ -157,14 +228,13 @@
             },
 
             renderCourseDetail: (container, course) => {
-                // Existing function from previous step
-                 if (!course) { container.innerHTML = '<p class="p-4">Không tìm thấy khóa học.</p>'; return; }
+                if (!course) { container.innerHTML = '<p class="p-4">Không tìm thấy khóa học.</p>'; return; }
                 const lessonsHtml = (course.lessons || []).map(lesson => `<div class="flex items-center justify-between p-4 rounded-xl ${lesson.completed ? 'bg-green-50' : 'bg-white'} border"><div class="flex items-center space-x-4"><div><h4 class="font-bold">${lesson.title}</h4></div></div></div>`).join('');
                 container.innerHTML = `<div class="p-4"><h2 class="text-xl font-bold">${course.title}</h2><div class="space-y-3 mt-4">${lessonsHtml}</div></div>`;
             },
-             toggleSidebar: () => {
-                document.getElementById('sidebar').classList.toggle('-translate-x-full');
-                document.getElementById('sidebar-overlay').classList.toggle('hidden');
+
+            renderCommunity: (container) => {
+                 container.innerHTML = `<div class="p-4"><h2 class="text-xl font-bold">Cộng đồng</h2><p class="mt-4 text-gray-500">Tính năng đang được xây dựng.</p></div>`;
             },
         };
 
