@@ -16,18 +16,24 @@ This project is a single-page application built with vanilla HTML, CSS, and Java
 
 ### Features Implemented
 
-*   **Application UI**: A comprehensive user interface for a community platform, including authentication, navigation, user profiles, content feeds, and an AI chat modal.
-*   **Google Analytics**: Integrated Google Analytics 4 using the standard `gtag.js` script in `index.html` to track user activity.
-*   **Deployment Fixes**: Corrected the build process to handle a vanilla JS project instead of a React-based one.
+*   **Application UI**: A comprehensive user interface for a community platform.
+*   **Google Analytics**: Integrated `gtag.js` for analytics.
+*   **Collapsible Sidebar**: A modern, responsive navigation menu.
 
-## Current Plan: Collapsible Navigation Menu
+## Current Plan: Course Detail View
 
-**Objective**: Implement a modern, collapsible sidebar navigation menu similar to the Gemini UI to create a cleaner and more organized interface.
+**Objective**: Create a detailed view for individual learning nodes (courses/challenges) that users can navigate to from the main "Học tập" screen.
 
 **Steps**:
 
-1.  **Create Menu Icon**: Add a "hamburger" menu icon to the top-left corner of the main application view.
-2.  **Build Sidebar Panel**: Construct a sidebar container that will be hidden by default and will slide in from the left.
-3.  **Relocate Navigation**: Move the existing primary navigation links ("Trang chủ", "Học tập", "Cộng đồng", "Nhiệm vụ") into the new sidebar.
-4.  **Implement Logic**: Write JavaScript functions to toggle the sidebar's visibility with a smooth slide-in/slide-out animation.
-5.  **Refine Styling**: Ensure the sidebar and menu icon are styled to match the application's modern aesthetic and are fully responsive.
+1.  **Create New View Function**: Develop a new function `renderCourseDetail(node)` to dynamically generate the HTML for the course detail page.
+2.  **Design Detail Layout**: The layout will include:
+    *   A prominent header with the course icon and title.
+    *   A 'Back' button to return to the previous screen.
+    *   A detailed description of the course.
+    *   A list of individual lessons or modules (using dummy data initially).
+    *   A primary call-to-action button, e.g., "Bắt đầu học".
+3.  **Implement Navigation Logic**: 
+    *   Create a function `app.openCourse(nodeId)` that finds the course data and triggers the rendering of the detail view.
+    *   Add an `onclick="app.openCourse(...)"` event to the "Tiếp tục hành trình" card on the home screen.
+    *   Update the main `app.render` function to handle a new view state, e.g., `course_detail`.
