@@ -13,20 +13,23 @@ This project is a modern React application built with Vite. It's designed to be 
 *   **Package Manager**: npm
 *   **Styling**: Plain CSS (initially)
 *   **Deployment**: Cloudflare Worker Site via Wrangler CLI
+*   **Analytics**: Google Analytics 4
 
 ### Features Implemented
 
 *   **Initial Scaffolding**: Standard Vite + React project setup.
 *   **Deployment Configuration**:
-    *   **Switched from Pages to Worker Sites**: The deployment strategy was changed from Cloudflare Pages to a Cloudflare Worker.
-    *   **Added `kv-asset-handler`**: This package is used by the Worker to serve the static assets of the React application.
-    *   **Created `worker.js`**: This script contains the logic for the Cloudflare Worker to handle incoming requests and serve the site content.
-    *   **Reconfigured `wrangler.toml`**: The configuration was updated to define a Worker Site, specifying the entry point (`worker.js`) and the asset directory (`./dist`).
+    *   Switched to Cloudflare Worker Sites for deployment.
+    *   Configured `wrangler.toml`, `worker.js`, and `kv-asset-handler`.
 
 ## Current Plan
 
-**Objective**: Deploy the React application as a Cloudflare Worker Site.
+**Objective**: Integrate Google Analytics 4 to track user activity.
 
-**Status**: The project has been reconfigured for a Worker deployment. The next step is to run the deployment command.
+**Steps**:
 
-**Next Action**: Execute `npx wrangler deploy` to publish the Worker Site.
+1.  **DONE**: Update `blueprint.md` with the new plan.
+2.  **IN PROGRESS**: Install the `react-ga4` library.
+3.  **NEXT**: Ask the user for their Google Analytics Measurement ID.
+4.  **NEXT**: Modify `App.jsx` to initialize Google Analytics and track pageviews.
+5.  **NEXT**: Commit and push the changes to the Git repository.
