@@ -4,9 +4,8 @@ import ReactGA from 'react-ga4';
 import './index.css';
 import App from './App.tsx';
 
-// Initialize Google Analytics
-// IMPORTANT: Replace G-YOUR_ID_HERE with your actual Measurement ID
-const gaMeasurementId = 'G-YOUR_ID_HERE';
+// Initialize Google Analytics with the provided Measurement ID
+const gaMeasurementId = 'G-R0LZL5XTQ0';
 ReactGA.initialize(gaMeasurementId);
 
 // Send a pageview event for the initial load
