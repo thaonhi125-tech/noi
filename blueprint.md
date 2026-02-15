@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a modern React application built with Vite. It's designed to be a simple, clean, and interactive user interface. The application is deployed to Cloudflare Pages.
+This project is a modern React application built with Vite. It's designed to be a simple, clean, and interactive user interface. The application is deployed as a **Cloudflare Worker Site**.
 
 ## Project Documentation
 
@@ -12,22 +12,21 @@ This project is a modern React application built with Vite. It's designed to be 
 *   **Language**: JavaScript (JSX)
 *   **Package Manager**: npm
 *   **Styling**: Plain CSS (initially)
-*   **Deployment**: Cloudflare Pages via Wrangler CLI
+*   **Deployment**: Cloudflare Worker Site via Wrangler CLI
 
 ### Features Implemented
 
 *   **Initial Scaffolding**: Standard Vite + React project setup.
 *   **Deployment Configuration**:
-    *   Added `_redirects` for client-side routing on Cloudflare Pages.
-    *   Configured `.gitignore` to exclude build artifacts (`dist`) and dependencies (`node_modules`).
-    *   Created `wrangler.toml` for simplified deployment via the Wrangler CLI.
+    *   **Switched from Pages to Worker Sites**: The deployment strategy was changed from Cloudflare Pages to a Cloudflare Worker.
+    *   **Added `kv-asset-handler`**: This package is used by the Worker to serve the static assets of the React application.
+    *   **Created `worker.js`**: This script contains the logic for the Cloudflare Worker to handle incoming requests and serve the site content.
+    *   **Reconfigured `wrangler.toml`**: The configuration was updated to define a Worker Site, specifying the entry point (`worker.js`) and the asset directory (`./dist`).
 
 ## Current Plan
 
-**Objective**: Finalize the project setup for manual deployment.
+**Objective**: Deploy the React application as a Cloudflare Worker Site.
 
-**Steps**:
+**Status**: The project has been reconfigured for a Worker deployment. The next step is to run the deployment command.
 
-1.  **DONE**: Create `wrangler.toml` to configure Cloudflare Pages deployment.
-2.  **CURRENT**: Commit `wrangler.toml` and the initial `blueprint.md` to the Git repository.
-3.  **NEXT**: The project is now ready for a streamlined manual deployment workflow using `npm run build` and `npx wrangler pages deploy`.
+**Next Action**: Execute `npx wrangler deploy` to publish the Worker Site.
