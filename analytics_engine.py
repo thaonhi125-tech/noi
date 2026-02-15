@@ -124,7 +124,7 @@ def build_user_features(
         agg["quiz_accuracy"] = np.nan
 
     # Engagement score
-    w1, w2, w3, w4, w5 = 0.9, 0.7, 0.8, _0.6, 0.4
+    w1, w2, w3, w4, w5 = 0.9, 0.7, 0.8, 0.6, 0.4
     z = (
         w1 * np.log1p(agg["minutes"]) +
         w2 * agg["active_days"] +
